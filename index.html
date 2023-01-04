@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header><h1>Lunch Roulette</h1></header>
+    <div id="content">
+    <form>
+        <h3>Distance</h3>
+        <input type="radio" id="distance1" name="Distance" value="250">
+        <label for="distance1">0 - 250</label><br>
+        <input type="radio" id="distance2" name="Distance" value="500">
+        <label for="distance2">250 - 500</label><br>
+        <input type="radio" id="distance3" name="Distance" value="750">
+        <label for="distance3">500 - 750</label><br>
+        <input type="radio" id="distance4" name="Distance" value="1000">
+        <label for="distance4">750 - 1000</label><br>
+        <input type="radio" id="distance5" name="Distance" value="10000">
+        <label for="distance5">1000 - 10000</label><br>
+        <button type="submit" id="button">submit</button>
+    </form>
+    <button id="searchLocation">Find my Location</button>
+    </div>
+    
+    <div id="map"></div>
+    <footer><p>Copyright 2023 &#169;</p></footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
