@@ -39,10 +39,10 @@ function positionFailed() {
 
 // Skapa karta
 function initMap() {
-  const position = new google.maps.LatLng(userPosition.lat, userPosition.lng);
+  const position = new google.maps.LatLng(59.3350995004924, 18.126819556283753);
   const map = new google.maps.Map(document.getElementById("mapContainer"), {
     center: position,
-    zoom: 15,
+    zoom: 5,
   });
 
   // Leta närliggande restauranger inom radie utifrån användarens position
@@ -65,7 +65,7 @@ function handleResults(results, status) {
     }
   }
 }
-=======
+
 const searchLocation = document.getElementById("searchLocation");
 const currentPositionFailure = document.createElement("p");
 const content = document.getElementById("content");
@@ -87,19 +87,19 @@ searchLocation.addEventListener('click', function askForPermission () {
   };
 
 // Initialize and add the map
-function initMap() {
-    // The location of Uluru
-    const uluru = { lat: -25.344, lng: 131.031 };
-    // The map, centered at Uluru
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: uluru,
-    });
-    // The marker, positioned at Uluru
-    const marker = new google.maps.Marker({
-      position: uluru,
-      map: map,
-    });
-  }
+// function initMap() {
+//     // The location of Uluru
+//     const uluru = { lat: -25.344, lng: 131.031 };
+//     // The map, centered at Uluru
+//     const map = new google.maps.Map(document.getElementById("map"), {
+//       zoom: 4,
+//       center: uluru,
+//     });
+//     // The marker, positioned at Uluru
+//     const marker = new google.maps.Marker({
+//       position: uluru,
+//       map: map,
+//     });
+//   }
   
   window.initMap = initMap;
