@@ -68,7 +68,7 @@ function handleResults(results, status) {
 
 const searchLocation = document.getElementById("searchLocation");
 const currentPositionFailure = document.createElement("p");
-const content = document.getElementById("content");
+const userSelection = document.getElementById("userSelection");
 
 searchLocation.addEventListener('click', function askForPermission () {
     navigator.geolocation.getCurrentPosition(success, error);
@@ -82,7 +82,7 @@ searchLocation.addEventListener('click', function askForPermission () {
   };
   
   function error () {
-    content.appendChild(currentPositionFailure);
+    userSelection.appendChild(currentPositionFailure);
     currentPositionFailure.innerHTML = 'Your location could not be found.' + '<br>' + 'Activate your location services.';
   };
 
