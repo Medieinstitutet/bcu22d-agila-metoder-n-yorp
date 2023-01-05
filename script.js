@@ -9,6 +9,9 @@
 //       console.log(data);
 //     });
 // }
+const searchLocation = document.getElementById("searchLocation");
+const currentPositionFailure = document.createElement("p");
+const userSelection = document.getElementById("userSelection");
 
 let userPosition = {
   lat: 0,
@@ -16,33 +19,30 @@ let userPosition = {
 };
 
 // Koll om GPS-stöd finns
-if (navigator.geolocation) {
-  // Stöd finns för GPS, hämta användarens position
-  const currentPosition = navigator.geolocation.getCurrentPosition(
-    positionSuccess,
-    positionFailed
-  );
-}
+searchLocation.addEventListener('click', function askForPermission () {
+  navigator.geolocation.getCurrentPosition(positionSuccess, error);
+});
 
 // Position hittad
 function positionSuccess(position) {
   userPosition.lat = position.coords.latitude;
   userPosition.lng = position.coords.longitude;
-
+  currentPositionFailure.style.display = 'none';
   initMap();
 }
 
 // Hittade ingen position
-function positionFailed() {
-  console.error("Kunde inte hitta din aktuella position.");
-}
+function error () {
+  userSelection.appendChild(currentPositionFailure);
+  currentPositionFailure.innerHTML = 'Your location could not be found.' + '<br>' + 'Activate your location services.';
+};
 
 // Skapa karta
 function initMap() {
-  const position = new google.maps.LatLng(59.3350995004924, 18.126819556283753);
+  const position = new google.maps.LatLng(userPosition.lat, userPosition.lng);
   const map = new google.maps.Map(document.getElementById("mapContainer"), {
     center: position,
-    zoom: 5,
+    zoom: 12,
   });
 
   // Leta närliggande restauranger inom radie utifrån användarens position
@@ -66,25 +66,10 @@ function handleResults(results, status) {
   }
 }
 
-const searchLocation = document.getElementById("searchLocation");
-const currentPositionFailure = document.createElement("p");
-const userSelection = document.getElementById("userSelection");
 
-searchLocation.addEventListener('click', function askForPermission () {
-    navigator.geolocation.getCurrentPosition(success, error);
-  });
+
   
-  function success (position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    console.log(latitude, longitude);
-    currentPositionFailure.style.display = 'none';
-  };
   
-  function error () {
-    userSelection.appendChild(currentPositionFailure);
-    currentPositionFailure.innerHTML = 'Your location could not be found.' + '<br>' + 'Activate your location services.';
-  };
 
 // Initialize and add the map
 // function initMap() {
