@@ -1,17 +1,14 @@
-
-// Funkar ej!
-// function getAPI() {
-//   const geolocation =
-//     "https://maps.googleapis.com/maps/api/js?key=AIzaSyChdFfavjaelMj60ZVsHfucDjHmIe1Myb0&callback=initMap";
-//   fetch(geolocation)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       console.log(data);
-//     });
-// }
 const searchLocation = document.getElementById("searchLocation");
 const currentPositionFailure = document.createElement("p");
 const userSelection = document.getElementById("userSelection");
+
+function startMap() {
+  const position = new google.maps.LatLng(62.27412, 15.2066);
+  const map = new google.maps.Map(document.getElementById("mapContainer"), {
+    center: position,
+    zoom: 4,
+  });
+}
 
 let userPosition = {
   lat: 0,
@@ -86,5 +83,5 @@ function handleResults(results, status) {
 //       map: map,
 //     });
 //   }
-  
-  window.initMap = initMap;
+  window.onload = startMap;
+ // window.initMap = initMap;
