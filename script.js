@@ -1,7 +1,7 @@
-const searchLocation = document.getElementById("searchLocation");
-const currentPositionFailure = document.createElement("p");
-const userSelection = document.getElementById("userSelection");
-const mapContainer = document.getElementById("mapContainer");
+const searchLocation = document.getElementById('searchLocation');
+const currentPositionFailure = document.createElement('p');
+const userSelection = document.getElementById('userSelection');
+const mapContainer = document.getElementById('mapContainer');
 
 function startMap() {
   const position = new google.maps.LatLng(62.27412, 15.2066);
@@ -16,37 +16,36 @@ let userPosition = {
   lng: 0,
 };
 
-let radioButtons = document.getElementsByName("Distance");
+let radioButtons = document.getElementsByName('Distance');
 
 // Koll om GPS-stöd finns
-searchLocation.addEventListener("click", function askForPermission() {
+searchLocation.addEventListener('click', function askForPermission() {
   navigator.geolocation.getCurrentPosition(positionSuccess, error);
   for (var i = 0, length = radioButtons.length; i < length; i++) {
     if (radioButtons[i].checked) {
-      console.log(radioButtons[i].value);
       radius = radioButtons[i].value;
-      localStorage.setItem('distance', radius)
+      localStorage.setItem('distance', radius);
       break;
-    }
-  }
+    };
+  };
 });
 
 // Position hittad
 function positionSuccess(position) {
   userPosition.lat = position.coords.latitude;
   userPosition.lng = position.coords.longitude;
-  currentPositionFailure.style.display = "none";
+  currentPositionFailure.style.display = 'none';
   initMap();
-}
+};
 
 // Hittade ingen position
 function error() {
   userSelection.appendChild(currentPositionFailure);
   currentPositionFailure.innerHTML =
-    "Your location could not be found." +
-    "<br>" +
-    "Activate your location services.";
-}
+    'Your location could not be found.' +
+    '<br>' +
+    'Activate your location services.';
+};
 
 // Skapa karta
 function initMap() {
@@ -60,8 +59,8 @@ function initMap() {
   const request = {
     location: position,
     radius: localStorage.getItem('distance'),
-    type: ["restaurant"],
-    // Open restaurants only
+    type: ['restaurant'],
+    openNow: true,
   };
 
   // Search for restaurants
@@ -87,15 +86,15 @@ function initMap() {
 
         // Info window
         const infoWindow = new google.maps.InfoWindow();
-        marker.addListener("click", () => {
+        marker.addListener('click', () => {
           infoWindow.close();
           infoWindow.setContent(marker.getTitle());
           infoWindow.open(marker.getMap(), marker);
         });
-      }
-    }
-  }
-}
+      };
+    };
+  };
+};
 
 window.onload = startMap;
 window.initMap = initMap;
