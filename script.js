@@ -25,6 +25,7 @@ searchLocation.addEventListener("click", function askForPermission() {
     if (radioButtons[i].checked) {
       console.log(radioButtons[i].value);
       radius = radioButtons[i].value;
+      localStorage.setItem('distance', radius)
       break;
     }
   }
@@ -58,7 +59,7 @@ function initMap() {
   // Leta närliggande restauranger inom radie utifrån användarens position
   const request = {
     location: position,
-    radius: "1500",
+    radius: localStorage.getItem('distance'),
     type: ["restaurant"],
     // Open restaurants only
   };
