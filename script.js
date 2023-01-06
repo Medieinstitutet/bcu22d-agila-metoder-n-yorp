@@ -58,11 +58,20 @@ function initMap() {
 function handleResults(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (let i = 0; i < results.length; i++) {
+      // restaurants.push(results[i].name);
       // printa en kartnål
     }
   }
 }
 
+function randomRestaurant() {
+  let restaurants = ["Bonanza", "kewlwe", "tupacs", "grottan", "pewpew", "hooodle", "ayaaa"];
+  
+  const random = Math.floor(Math.random() * restaurants.length);
+  return restaurants[random];
+}
+
+console.log(randomRestaurant());
 
 
   
