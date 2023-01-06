@@ -1,10 +1,11 @@
 const searchLocation = document.getElementById("searchLocation");
 const currentPositionFailure = document.createElement("p");
 const userSelection = document.getElementById("userSelection");
+const mapContainer = document.getElementById("mapContainer")
 
 function startMap() {
   const position = new google.maps.LatLng(62.27412, 15.2066);
-  const map = new google.maps.Map(document.getElementById("mapContainer"), {
+  const map = new google.maps.Map(mapContainer, {
     center: position,
     zoom: 4,
   });
@@ -37,7 +38,7 @@ function error () {
 // Skapa karta
 function initMap() {
   const position = new google.maps.LatLng(userPosition.lat, userPosition.lng);
-  const map = new google.maps.Map(document.getElementById("mapContainer"), {
+  const map = new google.maps.Map(mapContainer, {
     center: position,
     zoom: 12,
   });
@@ -45,43 +46,40 @@ function initMap() {
   // Leta närliggande restauranger inom radie utifrån användarens position
   const request = {
     location: position,
-    radius: "500",
+    radius: "1500",
     type: ["restaurant"],
+    // Open restaurants only
   };
 
-  // Gör en sökning… vänta på resultaten
-  const service = new google.maps.places.PlacesService(mapContainer);
+// Search for restaurants
+  const service = new google.maps.places.PlacesService(map);
   service.nearbySearch(request, handleResults);
-}
 
-// Skriv ut resultaten på kartan
-function handleResults(results, status) {
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (let i = 0; i < results.length; i++) {
-      // printa en kartnål
+// Add restaurants to map
+  function handleResults(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      console.log(results)
+      for (let i = 0; i < results.length; i++) {
+        var restaurant = results[i];
+        const position = { lat: restaurant.geometry.location.lat(), lng: restaurant.geometry.location.lng() }
+
+        const marker = new google.maps.Marker({
+          position: position,
+          map: map,
+          title: restaurant.name,
+        });
+        
+        // Info window
+        const infoWindow = new google.maps.InfoWindow();
+        marker.addListener("click", () => {
+          infoWindow.close();
+          infoWindow.setContent(marker.getTitle());
+          infoWindow.open(marker.getMap(), marker);
+        });
+      }
     }
   }
 }
 
-
-
-  
-  
-
-// Initialize and add the map
-// function initMap() {
-//     // The location of Uluru
-//     const uluru = { lat: -25.344, lng: 131.031 };
-//     // The map, centered at Uluru
-//     const map = new google.maps.Map(document.getElementById("map"), {
-//       zoom: 4,
-//       center: uluru,
-//     });
-//     // The marker, positioned at Uluru
-//     const marker = new google.maps.Marker({
-//       position: uluru,
-//       map: map,
-//     });
-//   }
-  window.onload = startMap;
- // window.initMap = initMap;
+window.onload = startMap;
+window.initMap = initMap;
