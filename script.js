@@ -2,6 +2,9 @@ const searchLocation = document.getElementById('searchLocation');
 const currentPositionFailure = document.createElement('p');
 const userSelection = document.getElementById('userSelection');
 const mapContainer = document.getElementById('mapContainer');
+const radioButtons = document.getElementsByName('Distance');
+const pageContent = document.getElementById('pageContent');
+const searchResults = document.getElementById('searchResults');
 
 function startMap() {
   const position = new google.maps.LatLng(62.27412, 15.2066);
@@ -16,7 +19,7 @@ let userPosition = {
   lng: 0,
 };
 
-let radioButtons = document.getElementsByName('Distance');
+searchResults.remove();
 
 // Koll om GPS-stöd finns
 searchLocation.addEventListener('click', function askForPermission() {
@@ -28,6 +31,7 @@ searchLocation.addEventListener('click', function askForPermission() {
       break;
     };
   };
+  pageContent.append(searchResults);
 });
 
 // Position hittad
@@ -71,7 +75,9 @@ function initMap() {
   function handleResults(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       console.log(results);
+
       for (let i = 0; i < results.length; i++) {
+        localStorage.setItem('foundRestaurants', JSON.stringify(results));
         var restaurant = results[i];
         const position = {
           lat: restaurant.geometry.location.lat(),
@@ -91,9 +97,50 @@ function initMap() {
           infoWindow.setContent(marker.getTitle());
           infoWindow.open(marker.getMap(), marker);
         });
+
+        searchResults.innerHTML = '';
+
+        displayResults();
       };
+    } else if (status !== google.maps.places.PlacesServiceStatus.OK) {
+      searchResults.innerHTML = 
+        'No open restaurants found within the specified distance. Please try a broader search!';
     };
   };
+};
+
+function displayResults() {
+  if (localStorage.getItem('distance') == '250') {
+    let distance = '250 m';
+    localStorage.setItem('distanceValue', distance);
+  } else if (localStorage.getItem('distance') == '500') {
+    let distance = '500 m';
+    localStorage.setItem('distanceValue', distance);
+  } else if (localStorage.getItem('distance') == '750') {
+    let distance = '750 m';
+    localStorage.setItem('distanceValue', distance);
+  } else if (localStorage.getItem('distance') == '1000') {
+    let distance = '1 km';
+    localStorage.setItem('distanceValue', distance);
+  } else if (localStorage.getItem('distance') == '5000') {
+    let distance = '5 km';
+    localStorage.setItem('distanceValue', distance);
+  } else if (localStorage.getItem('distance') == '10000') {
+    let distance = '10 km';
+    localStorage.setItem('distanceValue', distance);
+  }
+
+  searchResults.innerHTML =
+    '<h2>Open restaurants within ' + localStorage.getItem('distanceValue') + '</h2>';
+    
+  let foundRestaurants = JSON.parse(localStorage.getItem('foundRestaurants'));
+
+  foundRestaurants.map(restaurant => {
+    searchResults.innerHTML +=
+      '<p><strong>' + restaurant.name + '</strong></p>' +
+      '<p>' + restaurant.vicinity + '</p>' +
+      '<p>Rating: ' + restaurant.rating + ' / 5</p><br>';
+  });
 };
 
 window.onload = startMap;
