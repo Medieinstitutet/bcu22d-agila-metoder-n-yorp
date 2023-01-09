@@ -12,6 +12,10 @@
     <header><h1>Lunch Roulette</h1></header>
         <div id="pageContent">
             <div id="userSelection">
+                <div id="info-box">
+                    <p>Let Lunch Roulette pick a restaurant for you.<br> 
+                        Choose a distance in the box below to get a randomised restaurant.</p>
+                </div>
                 <form>
                     <h3>Distance up to:</h3>
                     <input type="radio" id="distance1" name="Distance" value="250">
@@ -28,8 +32,9 @@
                     <label for="distance6">10 km</label><br><br>
                 </form><br>
                 <button id="searchLocation">Lunch Roulette</button>
-            </div>   
+            </div>
             <div id="mapContainer"></div>
+            <div id="searchResults"></div> 
         </div>
         <footer><p>Copyright 2023 &#169;</p></footer>
     </div>

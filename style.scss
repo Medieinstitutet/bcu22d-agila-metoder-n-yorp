@@ -3,6 +3,8 @@ body {
     height: 100vh;
     padding: 0;
     margin: 0;
+    background-image:url('food-image.jpg');
+    background-size: cover;
 }
 
 header {
@@ -48,6 +50,16 @@ header {
   height: 400px;
   width: 40vw;
   border: 2px solid black;
+}
+
+#info-box {
+  position: relative;
+  width: 40vw;
+
+  p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 }
 
 footer {
