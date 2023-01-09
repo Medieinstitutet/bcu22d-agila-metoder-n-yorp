@@ -50,6 +50,18 @@ header {
   border: 2px solid black;
 }
 
+#info-box {
+  position: relative;
+  margin-left: 30px;
+  margin-top: 70px;
+  width: 40vw;
+
+  p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}
+
 footer {
     position: absolute;
     background-color: rgb(57, 2, 2);
