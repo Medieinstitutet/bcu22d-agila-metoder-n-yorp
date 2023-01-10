@@ -5,6 +5,26 @@ const mapContainer = document.getElementById('mapContainer');
 const radioButtons = document.getElementsByName('Distance');
 const pageContent = document.getElementById('pageContent');
 const searchResults = document.getElementById('searchResults');
+let wheel = document.querySelector('.wheel');
+let spinBtn = document.querySelector('.spinBtn');
+let value = Math.ceil(Math.random() * 3500);
+
+spinBtn.onclick = function() {
+  wheel.style.transform = "rotate(" + value + "deg)";
+  value += Math.ceil(Math.random() * 3500);
+
+  randomRestaurant()
+  console.log("Du ska äta på följande restaurang: ", randomRestaurant());
+}
+
+function randomRestaurant() {
+  let foundRestaurants = JSON.parse(localStorage.getItem('foundRestaurants'));
+  for (let i = 0; i < foundRestaurants.length; i++) {
+    foundRestaurants[i] = foundRestaurants[i].name;
+  }   
+  const random = Math.floor(Math.random() * foundRestaurants.length);
+  return foundRestaurants[random];
+}
 
 function startMap() {
   const position = new google.maps.LatLng(62.27412, 15.2066);
