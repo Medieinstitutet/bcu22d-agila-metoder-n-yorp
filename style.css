@@ -50,11 +50,11 @@ header h1 {
   border: 2px solid black;
 }
 
-#info-box {
+#infoBox {
   position: relative;
   width: 40vw;
 }
-#info-box p {
+#infoBox p {
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -71,15 +71,14 @@ footer p {
 }
 
 .container {
-  position: absolute;
+  position: relative;
   width: 350px;
   height: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2;
-  margin-left: 100px;
-  margin-top: 340px;
+  margin: auto;
 }
 
 .container .spinBtn {

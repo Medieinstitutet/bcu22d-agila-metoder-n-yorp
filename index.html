@@ -13,11 +13,11 @@
     <header><h1>Lunch Roulette</h1></header>
         <div id="pageContent">
             <div id="userSelection">
-                <div id="info-box">
+                <div id="infoBox">
                     <p>Let Lunch Roulette pick a restaurant for you.<br> 
                         Choose a distance in the box below to get a randomised restaurant.</p>
                 </div>
-                <form>
+                <form id="distanceOptions">
                     <h3>Distance up to:</h3>
                     <input type="radio" id="distance1" name="Distance" value="250">
                     <label for="distance1">250 m</label><br>
@@ -32,24 +32,24 @@
                     <input type="radio" id="distance6" name="Distance" value="10000">
                     <label for="distance6">10 km</label><br><br>
                 </form><br>
-                <button id="searchLocation">Lunch Roulette</button>
+                <button id="searchLocation">Find restaurants</button>
+
+                <div class="container">
+                    <div class="spinBtn">Spin</div>
+                    <div class="wheel">
+                        <div class="restaurant" style="--i:1;"><span><img id="food1" src="img/Corndogs.jpg" alt=""></span></div>
+                        <div class="restaurant" style="--i:2;"><span><img id="food2" src="img/chicken.jpg" alt=""> </span></div>
+                        <div class="restaurant" style="--i:3;"><span><img id="food3" src="img/veggies.jpg" alt=""> </span></div>
+                        <div class="restaurant" style="--i:4;"><span><img id="food4" src="img/pasta.jpg" alt=""> </span></div>
+                        <div class="restaurant" style="--i:5;"><span><img id="food5" src="img/Burger.jpg"></span></div>
+                        <div class="restaurant" style="--i:6;"><span><img id="food6" src="img/mixed.jpg" alt=""></span></div>
+                        <div class="restaurant" style="--i:7;"><span><img id="food7" src="img/milkshake.jpg" alt=""></span></div>
+                        <div class="restaurant" style="--i:8;"><span><img id="food8" src="img/Variety-fruits-vegetables.webp" alt=""></span></div>
+                    </div>
+                </div>
             </div>
             <div id="mapContainer"></div>
             <div id="searchResults"></div> 
-            <div class="container">
-                <div class="spinBtn">Spin</div>
-                <div class="wheel">
-                    <div class="restaurant" style="--i:1;"><span><img id="food1" src="img/Corndogs.jpg" alt=""></span></div>
-                    <div class="restaurant" style="--i:2;"><span><img id="food2" src="img/chicken.jpg" alt=""> </span></div>
-                    <div class="restaurant" style="--i:3;"><span><img id="food3" src="img/veggies.jpg" alt=""> </span></div>
-                    <div class="restaurant" style="--i:4;"><span><img id="food4" src="img/pasta.jpg" alt=""> </span></div>
-                    <div class="restaurant" style="--i:5;"><span><img id="food5" src="img/Burger.jpg"></span></div>
-                    <div class="restaurant" style="--i:6;"><span><img id="food6" src="img/mixed.jpg" alt=""></span></div>
-                    <div class="restaurant" style="--i:7;"><span><img id="food7" src="img/milkshake.jpg" alt=""></span></div>
-                    <div class="restaurant" style="--i:8;"><span><img id="food8" src="img/Variety-fruits-vegetables.webp" alt=""></span></div>
-                </div>
-            </div>
-
         </div>        
         <footer><p>Copyright 2023 &#169;</p></footer>
     </div>

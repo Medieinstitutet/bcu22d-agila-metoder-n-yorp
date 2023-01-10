@@ -4,27 +4,22 @@ const userSelection = document.getElementById('userSelection');
 const mapContainer = document.getElementById('mapContainer');
 const radioButtons = document.getElementsByName('Distance');
 const pageContent = document.getElementById('pageContent');
-const searchResults = document.getElementById('searchResults');
-let wheel = document.querySelector('.wheel');
-let spinBtn = document.querySelector('.spinBtn');
+const wheelContainer = document.querySelector('.container')
+const wheel = document.querySelector('.wheel');
+const spinBtn = document.querySelector('.spinBtn');
+const infoBox = document.getElementById('infoBox')
+const distanceOptions = document.getElementById('distanceOptions')
+const body = document.body;
 let value = Math.ceil(Math.random() * 3500);
 
-spinBtn.onclick = function() {
-  wheel.style.transform = "rotate(" + value + "deg)";
-  value += Math.ceil(Math.random() * 3500);
-
-  randomRestaurant()
-  console.log("Du ska äta på följande restaurang: ", randomRestaurant());
+let domReady = (cb) => {
+  document.readyState === 'interactive' || document.readyState === 'complete'? cb(): 
+  document.addEventListener('DOMContentLoaded', cb);
 }
 
-function randomRestaurant() {
-  let foundRestaurants = JSON.parse(localStorage.getItem('foundRestaurants'));
-  for (let i = 0; i < foundRestaurants.length; i++) {
-    foundRestaurants[i] = foundRestaurants[i].name;
-  }   
-  const random = Math.floor(Math.random() * foundRestaurants.length);
-  return foundRestaurants[random];
-}
+domReady(() => {
+  body.style.visibility = 'visible';
+});
 
 function startMap() {
   const position = new google.maps.LatLng(62.27412, 15.2066);
@@ -39,8 +34,6 @@ let userPosition = {
   lng: 0,
 };
 
-searchResults.remove();
-
 // Koll om GPS-stöd finns
 searchLocation.addEventListener('click', function askForPermission() {
   navigator.geolocation.getCurrentPosition(positionSuccess, error);
@@ -51,7 +44,6 @@ searchLocation.addEventListener('click', function askForPermission() {
       break;
     };
   };
-  pageContent.append(searchResults);
 });
 
 // Position hittad
@@ -118,13 +110,20 @@ function initMap() {
           infoWindow.open(marker.getMap(), marker);
         });
 
-        searchResults.innerHTML = '';
-
         displayResults();
+
+        infoBox.remove();
+        distanceOptions.remove();
+        searchLocation.remove();
+        userSelection.append(wheelContainer);
       };
     } else if (status !== google.maps.places.PlacesServiceStatus.OK) {
-      searchResults.innerHTML = 
-        'No open restaurants found within the specified distance. Please try a broader search!';
+        alert('No open restaurants found within the specified distance. Please try a broader search!');
+      
+        userSelection.append(infoBox);
+        userSelection.append(distanceOptions);
+        userSelection.append(searchLocation);
+        wheelContainer.remove();
     };
   };
 };
@@ -149,19 +148,27 @@ function displayResults() {
     let distance = '10 km';
     localStorage.setItem('distanceValue', distance);
   }
-
-  searchResults.innerHTML =
-    '<h2>Open restaurants within ' + localStorage.getItem('distanceValue') + '</h2>';
-    
-  let foundRestaurants = JSON.parse(localStorage.getItem('foundRestaurants'));
-
-  foundRestaurants.map(restaurant => {
-    searchResults.innerHTML +=
-      '<p><strong>' + restaurant.name + '</strong></p>' +
-      '<p>' + restaurant.vicinity + '</p>' +
-      '<p>Rating: ' + restaurant.rating + ' / 5</p><br>';
-  });
 };
+
+wheelContainer.remove();
+
+spinBtn.onclick = function() {
+  wheel.style.transform = "rotate(" + value + "deg)";
+  value += Math.ceil(Math.random() * 3500);
+
+  randomRestaurant();
+
+  console.log("Du ska äta på följande restaurang: ", randomRestaurant());
+}
+
+function randomRestaurant() {
+  let foundRestaurants = JSON.parse(localStorage.getItem('foundRestaurants'));
+  for (let i = 0; i < foundRestaurants.length; i++) {
+    foundRestaurants[i] = foundRestaurants[i].name;
+  }   
+  const random = Math.floor(Math.random() * foundRestaurants.length);
+  return foundRestaurants[random];
+}
 
 window.onload = startMap;
 window.initMap = initMap;
