@@ -40,7 +40,9 @@ header h1 {
   width: 40vw;
 }
 #userSelection form {
+  margin-left: 30px;
   position: relative;
+  color: white;
 }
 
 #mapContainer {
@@ -53,10 +55,16 @@ header h1 {
 #infoBox {
   position: relative;
   width: 40vw;
+  margin-left: 30px;
+  color: white;
 }
 #infoBox p {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+#searchLocation {
+  margin-left: 30px;
 }
 
 footer {
@@ -210,4 +218,8 @@ footer p {
   position: absolute;
   font-size: 0.75em;
   font-weight: 500;
+}
+
+.backgroundColor {
+  background-color: rgba(0, 0, 0, 0.7);
 }/*# sourceMappingURL=style.css.map */

@@ -115,6 +115,7 @@ function initMap() {
         infoBox.remove();
         distanceOptions.remove();
         searchLocation.remove();
+        userSelection.classList.remove('backgroundColor')
         userSelection.append(wheelContainer);
       };
     } else if (status !== google.maps.places.PlacesServiceStatus.OK) {
@@ -123,6 +124,7 @@ function initMap() {
         userSelection.append(infoBox);
         userSelection.append(distanceOptions);
         userSelection.append(searchLocation);
+        userSelection.classList.add('backgroundColor')
         wheelContainer.remove();
     };
   };

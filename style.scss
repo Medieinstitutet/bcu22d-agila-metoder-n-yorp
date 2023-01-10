@@ -41,7 +41,9 @@ header {
   width: 40vw;
 
   form {
+    margin-left: 30px;
     position: relative;
+    color: white;
   }
 }
 
@@ -55,11 +57,17 @@ header {
 #infoBox {
   position: relative;
   width: 40vw;
+  margin-left: 30px;
+  color: white;
 
   p {
     font-size: 1.2rem;
     font-weight: bold;
   }
+}
+
+#searchLocation {
+  margin-left: 30px;
 }
 
 footer {
@@ -207,4 +215,8 @@ footer {
   position: absolute;
   font-size: 0.75em;
   font-weight: 500;
+}
+
+.backgroundColor {
+  background-color: rgb(0, 0, 0, 0.7);
 }
