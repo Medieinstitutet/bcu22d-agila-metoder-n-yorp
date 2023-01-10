@@ -9,6 +9,7 @@ const wheel = document.querySelector('.wheel');
 const spinBtn = document.querySelector('.spinBtn');
 const infoBox = document.getElementById('infoBox')
 const distanceOptions = document.getElementById('distanceOptions')
+const chosenRestaurant = document.getElementById('chosenRestaurant')
 const body = document.body;
 let value = Math.ceil(Math.random() * 3500);
 
@@ -160,7 +161,9 @@ spinBtn.onclick = function() {
 
   randomRestaurant();
 
-  console.log("Du ska äta på följande restaurang: ", randomRestaurant());
+  chosenRestaurant.innerHTML = '<p><br>Du ska äta på följande restaurang:<br>' + randomRestaurant() + '<br><br></p>';
+
+  userSelection.append(chosenRestaurant)
 }
 
 function randomRestaurant() {
