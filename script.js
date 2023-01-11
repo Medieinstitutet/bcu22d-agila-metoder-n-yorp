@@ -108,18 +108,21 @@ function initMap() {
           position: position,
           map: map,
           title: restaurant.name,
+          vicinity: restaurant.vicinity,
+          rating: restaurant.rating
         });
-
+        
         // Info window
         const infoWindow = new google.maps.InfoWindow();
-        marker.addListener('click', () => {
+          marker.addListener('click', () => {
           infoWindow.close();
           infoWindow.setContent(marker.getTitle());
+          infoWindow.setContent(marker.rating);
           infoWindow.open(marker.getMap(), marker);
         });
 
         searchResults.innerHTML = '';
-
+        console.log(marker.rating);
         displayResults();
       };
     } else if (status !== google.maps.places.PlacesServiceStatus.OK) {
@@ -159,7 +162,7 @@ function displayResults() {
     searchResults.innerHTML +=
       '<p><strong>' + restaurant.name + '</strong></p>' +
       '<p>' + restaurant.vicinity + '</p>' +
-      '<p>Rating: ' + restaurant.rating + ' / 5</p><br>';
+      '<p>' + restaurant.rating + ' / 5</p><br>';
   });
 };
 
