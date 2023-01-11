@@ -7,10 +7,11 @@ const pageContent = document.getElementById('pageContent');
 const wheelContainer = document.querySelector('.container')
 const wheel = document.querySelector('.wheel');
 const spinBtn = document.querySelector('.spinBtn');
-const infoBox = document.getElementById('infoBox')
-const distanceOptions = document.getElementById('distanceOptions')
-const chosenRestaurant = document.getElementById('chosenRestaurant')
+const infoBox = document.getElementById('infoBox');
+const distanceOptions = document.getElementById('distanceOptions');
+const chosenRestaurant = document.getElementById('chosenRestaurant');
 const body = document.body;
+const errorMessage = document.getElementById('errorMessage')
 let value = Math.ceil(Math.random() * 3500);
 
 let domReady = (cb) => {
@@ -28,7 +29,7 @@ function startMap() {
     center: position,
     zoom: 4,
   });
-}
+};
 
 let userPosition = {
   lat: 0,
@@ -89,6 +90,8 @@ function initMap() {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       console.log(results);
 
+      errorMessage.innerHTML = '';
+
       for (let i = 0; i < results.length; i++) {
         localStorage.setItem('foundRestaurants', JSON.stringify(results));
         var restaurant = results[i];
@@ -116,15 +119,17 @@ function initMap() {
         infoBox.remove();
         distanceOptions.remove();
         searchLocation.remove();
-        userSelection.classList.remove('backgroundColor')
+        userSelection.classList.remove('backgroundColor');
         userSelection.append(wheelContainer);
       };
     } else if (status !== google.maps.places.PlacesServiceStatus.OK) {
-        alert('No open restaurants found within the specified distance. Please try a broader search!');
-      
+        if (localStorage.getItem('distance') !== null) {
+          errorMessage.innerHTML = '<br>No open restaurants found within the specified distance. Please try a broader search!';
+        };
         userSelection.append(infoBox);
         userSelection.append(distanceOptions);
         userSelection.append(searchLocation);
+        userSelection.append(errorMessage)
         userSelection.classList.add('backgroundColor')
         wheelContainer.remove();
     };
@@ -150,30 +155,34 @@ function displayResults() {
   } else if (localStorage.getItem('distance') == '10000') {
     let distance = '10 km';
     localStorage.setItem('distanceValue', distance);
-  }
+  };
 };
 
 wheelContainer.remove();
 
 spinBtn.onclick = function() {
-  wheel.style.transform = "rotate(" + value + "deg)";
+  wheel.style.transform = 'rotate(' + value + 'deg)';
   value += Math.ceil(Math.random() * 3500);
 
   randomRestaurant();
 
   chosenRestaurant.innerHTML = '<p><br>Du ska äta på följande restaurang:<br>' + randomRestaurant() + '<br><br></p>';
 
-  userSelection.append(chosenRestaurant)
+  userSelection.append(chosenRestaurant);
 }
 
 function randomRestaurant() {
   let foundRestaurants = JSON.parse(localStorage.getItem('foundRestaurants'));
   for (let i = 0; i < foundRestaurants.length; i++) {
     foundRestaurants[i] = foundRestaurants[i].name;
-  }   
+  };
   const random = Math.floor(Math.random() * foundRestaurants.length);
   return foundRestaurants[random];
-}
+};
 
 window.onload = startMap;
 window.initMap = initMap;
+
+if (window.location.reload) {
+  localStorage.removeItem('distance');
+}
