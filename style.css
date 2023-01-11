@@ -67,6 +67,12 @@ header h1 {
   margin-left: 30px;
 }
 
+#errorMessage {
+  position: relative;
+  color: red;
+  margin-left: 30px;
+}
+
 #chosenRestaurant {
   color: white;
   margin: auto;
