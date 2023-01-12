@@ -119,7 +119,6 @@ function initMap() {
         infoBox.remove();
         distanceOptions.remove();
         searchLocation.remove();
-        userSelection.classList.remove('backgroundColor');
         userSelection.append(wheelContainer);
       };
     } else if (status !== google.maps.places.PlacesServiceStatus.OK) {
@@ -166,7 +165,7 @@ spinBtn.onclick = function() {
 
   randomRestaurant();
 
-  chosenRestaurant.innerHTML = '<p><br>Du ska äta på följande restaurang:<br>' + randomRestaurant() + '<br><br></p>';
+  chosenRestaurant.innerHTML = '<p><br>Du ska äta på följande restaurang:</p><h2>' + randomRestaurant() + '<br><br></h2>';
 
   userSelection.append(chosenRestaurant);
 }
