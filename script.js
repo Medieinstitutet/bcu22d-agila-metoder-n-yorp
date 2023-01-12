@@ -174,6 +174,7 @@ spinBtn.onclick = function() {
 }
 
 function randomRestaurant() {
+  chosenRestaurant.remove();
   let foundRestaurants = JSON.parse(localStorage.getItem('foundRestaurants'));
   for (let i = 0; i < foundRestaurants.length; i++) {
     foundRestaurants[i] = foundRestaurants[i].name;
