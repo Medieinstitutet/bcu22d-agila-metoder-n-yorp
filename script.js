@@ -165,9 +165,12 @@ spinBtn.onclick = function() {
 
   randomRestaurant();
 
-  chosenRestaurant.innerHTML = '<p><br>Du ska äta på följande restaurang:</p><h2>' + randomRestaurant() + '<br><br></h2>';
+  var timeout = 0;
+  timeout = setTimeout(function() {
+    chosenRestaurant.innerHTML = '<p><br>Du ska äta på följande restaurang:</p><h2>' + randomRestaurant() + '<br><br></h2>';
 
-  userSelection.append(chosenRestaurant);
+    userSelection.append(chosenRestaurant);
+  }, 5100)
 }
 
 function randomRestaurant() {
