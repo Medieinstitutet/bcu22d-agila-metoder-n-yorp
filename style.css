@@ -35,9 +35,10 @@ header h1 {
 }
 
 #userSelection {
+  margin: auto;
   margin-top: 30px;
-  margin-left: 30px;
   width: 40vw;
+  height: 410px;
 }
 #userSelection form {
   margin-left: 30px;
@@ -46,6 +47,7 @@ header h1 {
 }
 
 #mapContainer {
+  margin: auto;
   margin-top: 30px;
   height: 400px;
   width: 40vw;
@@ -67,20 +69,23 @@ header h1 {
   margin-left: 30px;
 }
 
-#errorMessage {
+#errorMessage, .positionFailure {
   position: relative;
   color: red;
   margin-left: 30px;
 }
 
 #chosenRestaurant {
+  position: absolute;
   color: white;
-  z-index: 9999;
+  z-index: 3;
+  left: 0;
+  right: 50vw;
   margin: auto;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.8);
   width: 400px;
-  margin-top: 30px;
+  margin-top: -12vh;
 }
 
 footer {
