@@ -59,6 +59,7 @@ function positionSuccess(position) {
 // Hittade ingen position
 function error() {
   userSelection.appendChild(currentPositionFailure);
+  currentPositionFailure.classList.add('positionFailure')
   currentPositionFailure.innerHTML =
     'Your location could not be found.' +
     '<br>' +
@@ -167,7 +168,7 @@ spinBtn.onclick = function() {
 
   var timeout = 0;
   timeout = setTimeout(function() {
-    chosenRestaurant.innerHTML = '<p><br>Du ska äta på följande restaurang:</p><h2>' + randomRestaurant() + '<br><br></h2>';
+    chosenRestaurant.innerHTML = '<p><br>The wheel has spoken. You should eat at: </p><h2>' + randomRestaurant() + '<br></h2><p>Not happy? Give it another spin!</p><br>';
 
     userSelection.append(chosenRestaurant);
   }, 5100)
