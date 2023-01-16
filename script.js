@@ -1,23 +1,66 @@
+const classmates = [
+  'Dahir Abdirahman',
+  'Philip Andelic',
+  'Kevin Badwi',
+  'Jacob Bergendorff',
+  'Zarina Björklund',
+  'Fredrik Carlsson',
+  'Maximiliano Cid',
+  'Jakob Dahlberg',
+  'Edvin Ekström',
+  'Zakariya Farah Mahamud',
+  'Hossien Feili',
+  'Liza Grapensparr',
+  'Anton Henningsson',
+  'Felix Holmberg',
+  'Anton Husebye',
+  'Anwar Hussein',
+  'Osame Issa',
+  'Oscar Kannerstedt',
+  'Fredrik Karlsson',
+  'Nicolai Kristmundsson',
+  'Lars Lundin',
+  'Ellen Lång',
+  'Daniel Mårtensson',
+  'Carolin Nielsen',
+  'Antony Pinto Avila',
+  'Oscar Recen Larsson',
+  'Emelie Ribring',
+  'Martin Sjöborg',
+  'Jack Smith Insulander',
+  'Felipe Stiernhoff',
+  'Erik Strahle',
+  'Sara Söderlind',
+  'Mariam Touza',
+  'Mirelle Wallgren',
+  'Kristoffer Wallqvist',
+  'Katalin Widén',
+  'Alexander Åstrand',
+  'Delav Önen'
+];
+
 const searchLocation = document.getElementById('searchLocation');
 const currentPositionFailure = document.createElement('p');
 const userSelection = document.getElementById('userSelection');
 const mapContainer = document.getElementById('mapContainer');
 const radioButtons = document.getElementsByName('Distance');
 const pageContent = document.getElementById('pageContent');
-const wheelContainer = document.querySelector('.container')
+const wheelContainer = document.querySelector('.container');
 const wheel = document.querySelector('.wheel');
 const spinBtn = document.querySelector('.spinBtn');
 const infoBox = document.getElementById('infoBox');
 const distanceOptions = document.getElementById('distanceOptions');
 const chosenRestaurant = document.getElementById('chosenRestaurant');
+const yes = document.getElementById('yes');
+const teamBuilding = document.getElementById('teamBuilding');
 const body = document.body;
-const errorMessage = document.getElementById('errorMessage')
+const errorMessage = document.getElementById('errorMessage');
 let value = Math.ceil(Math.random() * 3500);
 
 let domReady = (cb) => {
   document.readyState === 'interactive' || document.readyState === 'complete'? cb(): 
   document.addEventListener('DOMContentLoaded', cb);
-}
+};
 
 domReady(() => {
   body.style.visibility = 'visible';
@@ -39,6 +82,9 @@ let userPosition = {
 // Koll om GPS-stöd finns
 searchLocation.addEventListener('click', function askForPermission() {
   navigator.geolocation.getCurrentPosition(positionSuccess, error);
+  if (yes.checked) {
+    randomClassmates();
+  }
   for (var i = 0, length = radioButtons.length; i < length; i++) {
     if (radioButtons[i].checked) {
       radius = radioButtons[i].value;
@@ -47,6 +93,25 @@ searchLocation.addEventListener('click', function askForPermission() {
     };
   };
 });
+
+function randomClassmates() {
+  const chosenStudents = new Set();
+  while (chosenStudents.size < 3) {
+    const arrayIndex = Math.floor(Math.random() * classmates.length);
+    chosenStudents.add(classmates[arrayIndex]);
+  };
+  const randomized = Array.from(chosenStudents).sort();
+  
+  let studentSentence = '';
+  for (let i = 0; i < randomized.length; i++) {
+    if (i === randomized.length - 1) {
+      studentSentence += 'and ' + randomized[i];
+    } else {
+      studentSentence += randomized[i] + ', ';
+    };
+  };
+  localStorage.setItem('chosenStudents', studentSentence);
+};
 
 // Position hittad
 function positionSuccess(position) {
@@ -59,7 +124,7 @@ function positionSuccess(position) {
 // Hittade ingen position
 function error() {
   userSelection.appendChild(currentPositionFailure);
-  currentPositionFailure.classList.add('positionFailure')
+  currentPositionFailure.classList.add('positionFailure');
   currentPositionFailure.innerHTML =
     'Your location could not be found.' +
     '<br>' +
@@ -118,6 +183,7 @@ function initMap() {
         displayResults();
 
         infoBox.remove();
+        teamBuilding.remove();
         distanceOptions.remove();
         searchLocation.remove();
         userSelection.append(wheelContainer);
@@ -129,8 +195,8 @@ function initMap() {
         userSelection.append(infoBox);
         userSelection.append(distanceOptions);
         userSelection.append(searchLocation);
-        userSelection.append(errorMessage)
-        userSelection.classList.add('backgroundColor')
+        userSelection.append(errorMessage);
+        userSelection.classList.add('backgroundColor');
         wheelContainer.remove();
     };
   };
@@ -167,12 +233,22 @@ spinBtn.onclick = function() {
   randomRestaurant();
 
   var timeout = 0;
-  timeout = setTimeout(function() {
-    chosenRestaurant.innerHTML = '<p><br>The wheel has spoken. You should eat at: </p><h2>' + randomRestaurant() + '<br></h2><p>Not happy? Give it another spin!</p><br>';
-
-    userSelection.append(chosenRestaurant);
-  }, 5100)
-}
+  if (localStorage.getItem('chosenStudents') !== null) {
+    timeout = setTimeout(function() {
+      const classmatesForLunch = localStorage.getItem('chosenStudents');
+      chosenRestaurant.innerHTML = '<p><br>The wheel has spoken. You should eat at: </p><h2>' + randomRestaurant() + '<br></h2><p>Your lunch company will be ' + 
+      classmatesForLunch + ".<br><br>You can't chose your company, but we'll let you spin for another restaurant.";
+  
+      userSelection.append(chosenRestaurant);
+    }, 5100);
+  } else {
+    timeout = setTimeout(function() {
+      chosenRestaurant.innerHTML = '<p><br>The wheel has spoken. You should eat at: </p><h2>' + randomRestaurant() + '<br></h2><p>Not happy? Give it another spin!</p><br>';
+  
+      userSelection.append(chosenRestaurant);
+    }, 5100);
+  };
+};
 
 function randomRestaurant() {
   chosenRestaurant.remove();
@@ -189,4 +265,5 @@ window.initMap = initMap;
 
 if (window.location.reload) {
   localStorage.removeItem('distance');
+  localStorage.removeItem('chosenStudents');
 }

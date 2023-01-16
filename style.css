@@ -83,7 +83,7 @@ header h1 {
   right: 50vw;
   margin: auto;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgb(0, 0, 0);
   width: 400px;
   margin-top: -12vh;
 }
