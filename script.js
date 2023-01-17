@@ -266,4 +266,6 @@ window.initMap = initMap;
 if (window.location.reload) {
   localStorage.removeItem('distance');
   localStorage.removeItem('chosenStudents');
+  teamBuilding.reset();
+  distanceOptions.reset();
 }
