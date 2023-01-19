@@ -1,0 +1,248 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-image:url('food-image.jpg');
+    background-size: cover;
+}
+
+header {
+    width: 100vw;
+    height: 90px;
+    background-color: rgb(57, 2, 2);
+    color: white;
+    text-align: center;
+    margin-top: 0;
+
+    h1 {
+      margin-top: 0;
+      padding-top: 20px;
+      font-size: 2.4rem;
+   }
+}
+
+#pageContainer {
+  position: relative;
+  min-height: 100vh;
+}
+
+#pageContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  grid-gap: 20px; 
+  max-width: 100vw; 
+  padding-bottom: 60px;
+}
+
+#userSelection {
+  margin: auto;
+  margin-top: 30px; 
+  width: 40vw;
+  height: 410px;
+
+  form {
+    margin-left: 30px;
+    position: relative;
+    color: white;
+  }
+}
+
+#mapContainer {
+  margin: auto;
+  margin-top: 30px;
+  height: 400px;
+  width: 40vw;
+  border: 2px solid black;
+}
+
+#infoBox {
+  position: relative;
+  width: 40vw;
+  margin-left: 30px;
+  color: white;
+
+  p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}
+
+#searchLocation {
+  margin-left: 30px;
+}
+
+#errorMessage, .positionFailure {
+  background-color: rgba(0, 0, 0, 0.8);
+  margin-top: 20px;
+  position: relative;
+  color: red;
+  padding-left: 30px;
+}
+
+#chosenRestaurant {
+  position: absolute;
+  color: white;
+  z-index: 3;
+  left: 0;
+  right: 50vw;
+  margin: auto;
+  text-align: center;
+  background-color: rgba(0, 0, 0);
+  width: 400px;
+  margin-top: -12vh;
+}
+
+footer {
+    position: absolute;
+    background-color: rgb(57, 2, 2);
+    width: 100vw;
+    bottom: 0;
+    color: white;
+
+    p {
+      margin-left: 10px;
+    }
+}
+.container {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.container .spinBtn {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 50%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: black;
+  letter-spacing: 0.1em;
+  border: 4px solid rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.container .spinBtn::before {
+  content: '';
+  position: absolute;
+  top: -28px;
+  width: 20px;
+  height: 30px;
+  background: #fff;
+  clip-path: polygon(50% 0%, 15% 100%, 85% 100%);
+}
+
+.container .wheel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 5px #333,
+  0 0 0 15px #fff,
+  0 0 0 18px #111;
+  transition: transform 5s ease-in-out;
+}
+
+.container .wheel .restaurant {
+  // border: 2px solid black;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: var(--clr);
+  transform-origin: bottom right;
+  transform: rotate(calc(45deg * var(--i)));
+  clip-path: polygon(0 0, 60% 0, 100% 100%, 0 56%);
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.container .wheel .restaurant span {
+  position: relative;
+  transform: rotate(45deg);
+  font-size: 2em;
+  font-weight: 200;
+  color: #fff;
+  text-shadow: 3px 5px 2px black;
+}
+#food1  {
+  background-position: center;
+  transform: rotate(-90deg);
+  width: 100%;
+  height: auto;
+}
+
+#food2  {
+  background-position: center;
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+#food3  {
+  background-position: center;
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+#food4  {
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+#food5  {
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+#food6  {
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+#food7  {
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+#food8  {
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.pageContent .userSelection .container .wheel .restaurant span::after {
+  content: '';
+  position: absolute;
+  font-size: 0.75em;
+  font-weight: 500;
+}
+
+.backgroundColor {
+  background-color: rgb(0, 0, 0, 0.7);
+}
