@@ -126,9 +126,9 @@ function error() {
   userSelection.appendChild(currentPositionFailure);
   currentPositionFailure.classList.add('positionFailure');
   currentPositionFailure.innerHTML =
-    'Your location could not be found.' +
+    '<br>Your location could not be found.' +
     '<br>' +
-    'Activate your location services.';
+    'Activate your location services.<br><br>';
 };
 
 // Skapa karta
@@ -190,7 +190,7 @@ function initMap() {
       };
     } else if (status !== google.maps.places.PlacesServiceStatus.OK) {
         if (localStorage.getItem('distance') !== null) {
-          errorMessage.innerHTML = '<br>No open restaurants found within the specified distance. Please try a broader search!';
+          errorMessage.innerHTML = '<br>No open restaurants found within the specified distance. Please try a broader search!<br><br>';
         };
         userSelection.append(infoBox);
         userSelection.append(distanceOptions);
